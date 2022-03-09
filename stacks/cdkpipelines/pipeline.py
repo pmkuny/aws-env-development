@@ -17,7 +17,7 @@ class CdkPipelineStack(cdk.Stack):
         self.pipeline =  CodePipeline(self, "Pipeline", 
                         synth=ShellStep("Synth", 
                             input=CodePipelineSource.connection(
-                                repo_string="pmkuny/aws-env", 
+                                repo_string="pmkuny/aws-env-development", 
                                 branch="develop", 
                                 connection_arn=self.connection_arn,
                                 trigger_on_push=True),
