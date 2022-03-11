@@ -33,6 +33,13 @@ class CdkPipelineStack(cdk.Stack):
         self.pipeline.add_stage(
             InfraStage(
                 self,
-                "AppStage"
+                "InfraStage"
+            )
+        )
+
+        self.pipeline.add_stage(
+            TeamCityStage(
+                self,
+                "TeamCityStage"
             )
         )
