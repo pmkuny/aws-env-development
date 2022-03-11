@@ -8,7 +8,7 @@ from stacks.infrastructure.networking import *
 from stacks.infrastructure.efs import *
 
 from stacks.cdkpipelines.pipeline import *
-from stacks.cdkpipelines.app_stage import *
+from stacks.cdkpipelines.stages import *
 
 
 def create_stack_test_functions():
