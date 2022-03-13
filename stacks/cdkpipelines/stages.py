@@ -10,7 +10,10 @@ from stacks.infrastructure.eks_cluster import InfrastructureEksCluster
 from stacks.infrastructure.networking import KubernetesNetworkingStack
 from stacks.infrastructure.efs import ClusterFileSystemStack
 
-class AppStage(cdk.Stage):
+from stacks.teamcity.networking import TeamCityVpc
+from stacks.teamcity.servers import TeamCityEnterpriseServer
+
+class InfraStage(cdk.Stage):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
@@ -37,3 +40,11 @@ class AppStage(cdk.Stage):
             my_cluster_stack=cluster_stack,
             my_network_stack=network_stack
         )
+
+
+class TeamCityStage(cdk.Stage):
+    def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
+        super().__init__(scope, construct_id, **kwargs)
+
+        self.networking_stack = TeamCityVpc(self, "TeamCityVpcStack")
+        self.server_stack = TeamCityEnterpriseServer(self, "TeamCityEnterpriseServerStack", my_networking_stack=self.networking_stack)

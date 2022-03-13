@@ -2,15 +2,18 @@ import logging
 import os
 from ensurepip import version
 from ossaudiodev import control_names
+from platform import node
 from select import select
 from aws_cdk import (
     aws_eks as eks,
     aws_ec2 as ec2,
     aws_iam as iam,
-    Stack
+    Stack,
+    Tags
 )
 from constructs import Construct
 from stacks.infrastructure.networking import KubernetesNetworkingStack
+import shortuuid
 
 # Set default log level to warning, allowing override by Environment Variable
 LOGLEVEL = os.environ.get('LOGLEVEL', 'WARNING').upper()
@@ -56,5 +59,9 @@ class InfrastructureEksCluster(Stack):
         self.worker_nodegroup = self.cluster.add_nodegroup_capacity(
             "WorkerNodeGroup",
             labels={"nodetype": "worker"},
+            tags={
+              "Name":f"EKS-{shortuuid.uuid()}"
+            },
             subnets=ec2.SubnetSelection(subnets=[*self.worker_subnets])
         )
+
