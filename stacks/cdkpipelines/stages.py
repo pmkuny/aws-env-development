@@ -11,6 +11,7 @@ from stacks.infrastructure.networking import KubernetesNetworkingStack
 from stacks.infrastructure.efs import ClusterFileSystemStack
 
 from stacks.teamcity.networking import TeamCityVpc
+from stacks.teamcity.servers import TeamCityEnterpriseServer
 
 class InfraStage(cdk.Stage):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
@@ -46,3 +47,4 @@ class TeamCityStage(cdk.Stage):
         super().__init__(scope, construct_id, **kwargs)
 
         self.networking_stack = TeamCityVpc(self, "TeamCityVpcStack")
+        self.server_stack = TeamCityEnterpriseServer(self, "TeamCityEnterpriseServerStack", my_networking_stack=self.networking_stack)
