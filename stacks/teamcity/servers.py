@@ -45,5 +45,6 @@ class TeamCityEnterpriseServer(Stack):
             user_data=self.tc_install,
             user_data_causes_replacement=True,
             vpc=my_networking_stack.vpc,
+            vpc_subnets=ec2.SubnetSelection(subnet_type=ec2.SubnetType.PUBLIC)
         )
 
