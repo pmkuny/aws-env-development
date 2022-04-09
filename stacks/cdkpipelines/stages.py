@@ -9,6 +9,7 @@ from stacks.infrastructure.ecr import EcrStack
 from stacks.infrastructure.eks_cluster import InfrastructureEksCluster
 from stacks.infrastructure.networking import KubernetesNetworkingStack
 from stacks.infrastructure.efs import ClusterFileSystemStack
+from stacks.infrastructure.s3 import MyS3Stack
 
 from stacks.teamcity.networking import TeamCityVpc
 from stacks.teamcity.servers import TeamCityEnterpriseServer
@@ -39,6 +40,11 @@ class InfraStage(cdk.Stage):
             "ClusterFilesystemStack",
             my_cluster_stack=cluster_stack,
             my_network_stack=network_stack
+        )
+
+        my_s3_stack = MyS3Stack(
+            self,
+            "MyS3Stack",
         )
 
 
