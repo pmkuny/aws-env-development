@@ -10,7 +10,7 @@ from stacks.infrastructure.eks_cluster import InfrastructureEksCluster
 from stacks.infrastructure.networking import KubernetesNetworkingStack
 from stacks.infrastructure.efs import ClusterFileSystemStack
 
-from stacks.infrastructure.cloud9.cloud9 import Cloud9EnvStack
+from stacks.cloud9.cloud9 import Cloud9EnvStack
 
 from stacks.teamcity.networking import TeamCityVpc
 from stacks.teamcity.servers import TeamCityEnterpriseServer
