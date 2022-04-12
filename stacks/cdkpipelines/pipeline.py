@@ -5,7 +5,7 @@ import logging
 from constructs import Construct
 from aws_cdk.pipelines import CodePipeline, CodePipelineSource, ShellStep
 
-from stacks.cdkpipelines.stages import InfraStage
+from stacks.cdkpipelines.stages import Cloud9EnvironmentStage, InfraStage
 from stacks.cdkpipelines.stages import TeamCityStage
 
 class CdkPipelineStack(cdk.Stack):
@@ -41,5 +41,12 @@ class CdkPipelineStack(cdk.Stack):
             TeamCityStage(
                 self,
                 "TeamCityStage"
+            )
+        )
+
+        self.pipeline.add_stage(
+            Cloud9EnvironmentStage(
+                self,
+                "Cloud9EnvironmentStage"
             )
         )
