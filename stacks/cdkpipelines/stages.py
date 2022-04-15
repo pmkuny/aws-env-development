@@ -10,6 +10,8 @@ from stacks.infrastructure.eks_cluster import InfrastructureEksCluster
 from stacks.infrastructure.networking import KubernetesNetworkingStack
 from stacks.infrastructure.efs import ClusterFileSystemStack
 
+from stacks.cloud9.cloud9 import Cloud9EnvStack
+
 from stacks.teamcity.networking import TeamCityVpc
 from stacks.teamcity.servers import TeamCityEnterpriseServer
 
@@ -41,10 +43,15 @@ class InfraStage(cdk.Stage):
             my_network_stack=network_stack
         )
 
-
 class TeamCityStage(cdk.Stage):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
         self.networking_stack = TeamCityVpc(self, "TeamCityVpcStack")
         self.server_stack = TeamCityEnterpriseServer(self, "TeamCityEnterpriseServerStack", my_networking_stack=self.networking_stack)
+
+class Cloud9EnvironmentStage(cdk.Stage):
+    def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
+        super().__init__(scope, construct_id, **kwargs)
+
+        cloud9_dev_env_stack = Cloud9EnvStack(self, "Cloud9DevEnvironment")

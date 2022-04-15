@@ -12,7 +12,7 @@ class TeamCityVpc(Stack):
             self,
             "TeamCityVpc",
             cidr="10.0.0.0/16",
-            enable_dns_hostnames=False,
+            enable_dns_hostnames=True,
             enable_dns_support=True,
         )
 
