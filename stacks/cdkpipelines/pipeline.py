@@ -30,12 +30,21 @@ class CdkPipelineStack(cdk.Stack):
                         )
                     )
         
-        self.pipeline.add_stage(
+        self.infra_stage = self.pipeline.add_stage(
             InfraStage(
                 self,
                 "InfraStage"
             )
         )
+        
+        self.infra_stage.add_post(
+            ShellStep(
+                "validate",
+                input=self.pipeline.synth,
+                commands=["python3 tests/integration/teamcity_reachability/main.py"]
+                )
+            )
+        
 
         self.pipeline.add_stage(
             TeamCityStage(
@@ -50,3 +59,11 @@ class CdkPipelineStack(cdk.Stack):
                 "Cloud9EnvironmentStage"
             )
         )
+        
+#        self.pipeline.add_stage(
+#            IntegrationTestStage(
+#                self,
+#                "IntegrationTestStage"
+#            )
+#        )
+#        

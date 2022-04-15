@@ -9,7 +9,6 @@ from stacks.infrastructure.ecr import EcrStack
 from stacks.infrastructure.eks_cluster import InfrastructureEksCluster
 from stacks.infrastructure.networking import KubernetesNetworkingStack
 from stacks.infrastructure.efs import ClusterFileSystemStack
-from stacks.infrastructure.testing_lambda import TestingLambdaStack
 
 from stacks.cloud9.cloud9 import Cloud9EnvStack
 
@@ -57,8 +56,3 @@ class Cloud9EnvironmentStage(cdk.Stage):
 
         cloud9_dev_env_stack = Cloud9EnvStack(self, "Cloud9DevEnvironment")
 
-class IntegrationTestStage(cdk.Stage):
-    def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
-        super().__init__(scope, construct_id, **kwargs)
-    
-        testing_lambda_stack = TestingLambdaStack(self, "TestingLambdaStack")
