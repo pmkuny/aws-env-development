@@ -9,6 +9,7 @@ from stacks.infrastructure.ecr import EcrStack
 from stacks.infrastructure.eks_cluster import InfrastructureEksCluster
 from stacks.infrastructure.networking import KubernetesNetworkingStack
 from stacks.infrastructure.efs import ClusterFileSystemStack
+from stacks.infrastructure.monitoring import AmpStack
 
 from stacks.cloud9.cloud9 import Cloud9EnvStack
 
@@ -42,6 +43,11 @@ class InfraStage(cdk.Stage):
             my_cluster_stack=cluster_stack,
             my_network_stack=network_stack
         )
+        
+        amp_stack = AmpStack(
+            self,
+            "AmpStack"
+            )
 
 class TeamCityStage(cdk.Stage):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
