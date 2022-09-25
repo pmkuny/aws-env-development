@@ -14,6 +14,7 @@ class EcrStack(Stack):
             self,
             "PrivateRepository",
             image_scan_on_push=True,
+            repository_name="TestECR"
         )
 
         CfnOutput(
