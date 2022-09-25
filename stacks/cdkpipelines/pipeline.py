@@ -30,12 +30,26 @@ class CdkPipelineStack(cdk.Stack):
                         )
                     )
         
-        self.pipeline.add_stage(
+        self.infra_stage = self.pipeline.add_stage(
             InfraStage(
                 self,
                 "InfraStage"
             )
         )
+        
+        # TODO: Figure out sourcing from CodePipeline raw source (not synth'd assets)
+#        self.infra_stage.add_post(
+#            ShellStep(
+#                "IntegrationTests",
+#                input=CodePipelineSource.connection(
+#                    repo_string="pmkuny/aws-env-development", 
+#                    branch="develop", 
+#                    connection_arn=self.connection_arn,
+#                    trigger_on_push=True),
+#                commands=["python3 tests/integration/teamcity_reachability/main.py"]
+#                )
+#            )
+        
 
         self.pipeline.add_stage(
             TeamCityStage(
@@ -50,3 +64,4 @@ class CdkPipelineStack(cdk.Stack):
                 "Cloud9EnvironmentStage"
             )
         )
+        

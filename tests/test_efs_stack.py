@@ -16,3 +16,5 @@ def test_efs_stack():
     # Stack to be tested
     stack = ClusterFileSystemStack(app, "ClusterFileSystemStack", my_cluster_stack=cluster_stack, my_network_stack=network_stack)
     template = assertions.Template.from_stack(stack)
+    
+    
