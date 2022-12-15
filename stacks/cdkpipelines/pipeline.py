@@ -50,14 +50,6 @@ class CdkPipelineStack(cdk.Stack):
 #                )
 #            )
         
-
-        self.pipeline.add_stage(
-            TeamCityStage(
-                self,
-                "TeamCityStage"
-            )
-        )
-
         self.pipeline.add_stage(
             Cloud9EnvironmentStage(
                 self,
