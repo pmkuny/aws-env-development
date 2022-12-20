@@ -6,7 +6,6 @@ from constructs import Construct
 from aws_cdk.pipelines import CodePipeline, CodePipelineSource, ShellStep
 
 from stacks.cdkpipelines.stages import Cloud9EnvironmentStage, InfraStage
-from stacks.cdkpipelines.stages import TeamCityStage
 
 class CdkPipelineStack(cdk.Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
@@ -50,14 +49,7 @@ class CdkPipelineStack(cdk.Stack):
 #                )
 #            )
         
-
-        self.pipeline.add_stage(
-            TeamCityStage(
-                self,
-                "TeamCityStage"
-            )
-        )
-
+# Deploy our Cloud9 Environment for Developmnet
         self.pipeline.add_stage(
             Cloud9EnvironmentStage(
                 self,
