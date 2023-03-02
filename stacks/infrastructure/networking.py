@@ -21,14 +21,14 @@ class KubernetesNetworkingStack(Stack):
        self.control_subnets = ec2.SubnetConfiguration(
            name = 'Control',
            cidr_mask=28,
-           subnet_type= ec2.SubnetType.PRIVATE_WITH_NAT,
+           subnet_type= ec2.SubnetType.PRIVATE_WITH_EGRESS,
            reserved= False
        )
 
        self.worker_subnets = ec2.SubnetConfiguration(
                name = 'Worker',
                cidr_mask=24,
-               subnet_type = ec2.SubnetType.PRIVATE_WITH_NAT,
+               subnet_type = ec2.SubnetType.PRIVATE_WITH_EGRESS,
                reserved = False
            )
 
@@ -42,12 +42,13 @@ class KubernetesNetworkingStack(Stack):
 
        self.kubernetes_vpc = ec2.Vpc(self, 
        "Infrastructure-Kubernetes-KubernetesVpc", 
-       cidr=my_cidr,
+       #cidr=my_cidr,
        default_instance_tenancy=ec2.DefaultInstanceTenancy.DEFAULT,
        enable_dns_hostnames=True,
        enable_dns_support=True,
        flow_logs=None,
        gateway_endpoints=None,
+       ip_addresses=ec2.IpAddresses.cidr(my_cidr),
        max_azs=2,
        nat_gateway_provider=ec2.NatProvider.gateway(),
        nat_gateways=1, # this is 1 PER AZ

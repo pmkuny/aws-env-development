@@ -13,9 +13,6 @@ from stacks.infrastructure.monitoring import AmpStack
 
 from stacks.cloud9.cloud9 import Cloud9EnvStack
 
-from stacks.teamcity.networking import TeamCityVpc
-from stacks.teamcity.servers import TeamCityEnterpriseServer
-
 class InfraStage(cdk.Stage):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
@@ -48,6 +45,7 @@ class InfraStage(cdk.Stage):
             self,
             "AmpStack"
             )
+            
 class Cloud9EnvironmentStage(cdk.Stage):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
