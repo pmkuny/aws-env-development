@@ -12,6 +12,7 @@ from aws_cdk import (
 from constructs import Construct
 from stacks.infrastructure.networking import KubernetesNetworkingStack
 import shortuuid
+from aws_cdk.lambda_layer_kubectl_v24 import KubectlV24Layer # default layer is v 1.20
 
 # Set default log level to warning, allowing override by Environment Variable
 LOGLEVEL = os.environ.get('LOGLEVEL', 'WARNING').upper()
@@ -44,6 +45,7 @@ class InfrastructureEksCluster(Stack):
             alb_controller=eks.AlbControllerOptions(version=eks.AlbControllerVersion.V2_3_1),
             default_capacity=0,
             endpoint_access=eks.EndpointAccess.PUBLIC_AND_PRIVATE,
+            kubectl_layer=KubectlV24Layer(self, "KubectlLayer"),
             version=eks.KubernetesVersion.V1_24,
             security_group=my_network_stack.controlplane_security_group,
             vpc=my_network_stack.kubernetes_vpc,
