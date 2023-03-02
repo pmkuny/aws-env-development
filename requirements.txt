@@ -2,3 +2,4 @@ aws-cdk-lib
 constructs
 shortuuid
 pre-commit
+aws-cdk.lambda-layer-kubectl-v24

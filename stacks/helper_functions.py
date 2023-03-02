@@ -1,3 +1,5 @@
+
+# Retrieve current workspace IP and and return as /32 CIDR value
 from aws_cdk import aws_ssm as ssm
 from aws_cdk import aws_iam as iam
 

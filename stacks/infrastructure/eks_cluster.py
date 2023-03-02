@@ -1,9 +1,7 @@
 import logging
 import os
 from ensurepip import version
-from ossaudiodev import control_names
 from platform import node
-from select import select
 from aws_cdk import (
     aws_eks as eks,
     aws_ec2 as ec2,
@@ -14,6 +12,7 @@ from aws_cdk import (
 from constructs import Construct
 from stacks.infrastructure.networking import KubernetesNetworkingStack
 import shortuuid
+from aws_cdk.lambda_layer_kubectl_v24 import KubectlV24Layer # default layer is v 1.20
 
 # Set default log level to warning, allowing override by Environment Variable
 LOGLEVEL = os.environ.get('LOGLEVEL', 'WARNING').upper()
@@ -43,10 +42,11 @@ class InfrastructureEksCluster(Stack):
         self.cluster = eks.Cluster(
             self,
             "InfrastructureCluster",
-            alb_controller=eks.AlbControllerOptions(version=eks.AlbControllerVersion.V2_3_1),
+            alb_controller=eks.AlbControllerOptions(version=eks.AlbControllerVersion.V2_4_1),
             default_capacity=0,
             endpoint_access=eks.EndpointAccess.PUBLIC_AND_PRIVATE,
-            version=eks.KubernetesVersion.V1_21,
+            kubectl_layer=KubectlV24Layer(self, "KubectlLayer"),
+            version=eks.KubernetesVersion.V1_24,
             security_group=my_network_stack.controlplane_security_group,
             vpc=my_network_stack.kubernetes_vpc,
             vpc_subnets=
