@@ -46,7 +46,7 @@ class InfrastructureEksCluster(Stack):
             alb_controller=eks.AlbControllerOptions(version=eks.AlbControllerVersion.V2_3_1),
             default_capacity=0,
             endpoint_access=eks.EndpointAccess.PUBLIC_AND_PRIVATE,
-            version=eks.KubernetesVersion.V1_21,
+            version=eks.KubernetesVersion.V1_24,
             security_group=my_network_stack.controlplane_security_group,
             vpc=my_network_stack.kubernetes_vpc,
             vpc_subnets=
