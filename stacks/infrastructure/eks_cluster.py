@@ -1,9 +1,7 @@
 import logging
 import os
 from ensurepip import version
-from ossaudiodev import control_names
 from platform import node
-from select import select
 from aws_cdk import (
     aws_eks as eks,
     aws_ec2 as ec2,

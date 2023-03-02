@@ -1,3 +1,4 @@
+aws-cdk.lambda-layer-kubectl
 aws-cdk-lib 
 constructs
 shortuuid
