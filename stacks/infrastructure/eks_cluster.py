@@ -42,7 +42,7 @@ class InfrastructureEksCluster(Stack):
         self.cluster = eks.Cluster(
             self,
             "InfrastructureCluster",
-            alb_controller=eks.AlbControllerOptions(version=eks.AlbControllerVersion.V2_3_1),
+            alb_controller=eks.AlbControllerOptions(version=eks.AlbControllerVersion.V2_4_1),
             default_capacity=0,
             endpoint_access=eks.EndpointAccess.PUBLIC_AND_PRIVATE,
             kubectl_layer=KubectlV24Layer(self, "KubectlLayer"),
