@@ -12,7 +12,7 @@ class CdkPipelineStack(cdk.Stack):
         super().__init__(scope, construct_id, **kwargs)
 
         # Make sure our connection ARN is set before trying to execute the Pipeline
-        self.connection_arn = f'arn:aws:codestar-connections:us-west-2:{os.environ.get("CDK_DEFAULT_ACCOUNT")}:connection/dec5cc18-a17b-496d-a4ef-363e509fae51'
+        self.connection_arn = f'arn:aws:codestar-connections:us-west-2:{os.environ.get("CDK_DEFAULT_ACCOUNT")}:connection/3141d1db-68ad-41a9-a9b1-7c454498a6a2'
 
         self.pipeline =  CodePipeline(self, "Pipeline", 
                         synth=ShellStep("Synth", 
