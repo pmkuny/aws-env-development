@@ -2,6 +2,7 @@ from unittest.mock import DEFAULT
 import aws_cdk.aws_ec2 as ec2
 from aws_cdk import Stack
 from constructs import Construct
+import aws_cdk.aws_ssm as ssm
 
 
 class KubernetesNetworkingStack(Stack):
@@ -55,6 +56,19 @@ class KubernetesNetworkingStack(Stack):
        subnet_configuration=[self.public_subnets,self.control_subnets,self.worker_subnets],
        vpn_connections=None
        )
+       
+       # TODO SECURITY GROUP SETUP 
+       #self.my_ip = ssm.StringParameter(self, "MyIp").value_from_lookup(self, parameter_name="/cdk/global/ip")
+       #
+       #
+       #self.argo_sg = ec2.SecurityGroup(self,
+       #"ArgoServerSecurityGroup",
+       #vpc=self.kubernetes_vpc,
+       #security_group_name="Argo Server Security Group",
+       #)
+       #
+       #self.argo_sg.add_ingress_rule(
+           
        
 
        self.controlplane_security_group = ec2.SecurityGroup(self, "ControlPlaneSecurityGroup", vpc=self.kubernetes_vpc)

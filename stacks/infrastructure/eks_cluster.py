@@ -6,6 +6,7 @@ from aws_cdk import (
     aws_eks as eks,
     aws_ec2 as ec2,
     aws_iam as iam,
+    aws_kms as kms,
     Stack,
     Tags
 )
@@ -64,4 +65,6 @@ class InfrastructureEksCluster(Stack):
             },
             subnets=ec2.SubnetSelection(subnets=[*self.worker_subnets])
         )
-
+        
+        # Create encryption at rest KMS Key
+        self.cluster_encryption_key = kms.Key(self, "ClusterEncryptionKey")
