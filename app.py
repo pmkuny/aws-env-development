@@ -37,5 +37,6 @@ cdkpipeline_stack = CdkPipelineStack(
     )
 )
 
+Tags.of(app).add('CDK', 'true')
 
 app.synth()
