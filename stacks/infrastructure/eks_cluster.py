@@ -69,4 +69,3 @@ class InfrastructureEksCluster(Stack):
         # Create encryption at rest KMS Key
         self.cluster_encryption_key = kms.Key(self, "ClusterEncryptionKey")
         
-        Tags.of(Stack).add("CDK", "True")

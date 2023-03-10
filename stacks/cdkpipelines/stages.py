@@ -4,6 +4,7 @@ import os
 import logging
 from constructs import Construct
 from aws_cdk.pipelines import CodePipeline, CodePipelineSource, ShellStep
+from aws_cdk import Tags
 
 from stacks.infrastructure.ecr import EcrStack
 from stacks.infrastructure.eks_cluster import InfrastructureEksCluster
@@ -45,6 +46,12 @@ class InfraStage(cdk.Stage):
             self,
             "AmpStack"
             )
+           
+        Tags.of(network_stack).add("Managed","CDK")
+        Tags.of(cluster_stack).add("Managed","CDK")
+        Tags.of(ecr_stack).add("Managed","CDK")
+        Tags.of(efs_stack).add("Managed","CDK")
+        Tags.of(amp_stack).add("Managed","CDK")
             
 class Cloud9EnvironmentStage(cdk.Stage):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
