@@ -56,9 +56,11 @@ class InfrastructureEksCluster(Stack):
                  ec2.SubnetSelection(subnet_type=ec2.SubnetType.PUBLIC)
             ],
         )
-
+        
+        # Add capacity - the desired size defaults to 2.
         self.worker_nodegroup = self.cluster.add_nodegroup_capacity(
             "WorkerNodeGroup",
+            desired_size=3,
             labels={"nodetype": "worker"},
             tags={
               "Name":f"EKS-{shortuuid.uuid()}"
